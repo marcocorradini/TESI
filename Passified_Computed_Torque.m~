@@ -105,10 +105,8 @@ function [Passified_Computed_Torque_Results] = Passified_Computed_Torque(q,qA,pa
             % che il controllore sia passivo (formula modificata con
             % apporto del tank
             [dW1] = Passivity_test_CT2(q,dq,B,C,Kd,Kp,e,tau,z,dz,T,alpha);
-            
-            % integro e trovo il valore di z al passo successivo evitando che 
-            % T diventi < Tmin
-            z=max(2*sqrt(Tmin), z+dz*dt);      
+    
+            z=z+dz*dt;      % integro e trovo il valore di z al passo successivo                        
             
             u=B*(alpha*Kp*e+Kd*de) + C*dq + g;           %coppia in uscita dal regolatore
                
